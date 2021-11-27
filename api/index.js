@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Users = require("./model/users");
 const Tasks = require("./model/tasks");
 const { find } = require("./model/users");
+require("dotenv").config();
 
 const app = express();
 // Bodyparser middleware
@@ -18,13 +19,10 @@ app.use(cors());
 
 //db
 mongoose
-  .connect(
-    "mongodb+srv://abubakar:03068816053@cluster0.tyw25.mongodb.net/taskapp?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
